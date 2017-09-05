@@ -75,7 +75,7 @@ d1 = sort(rsqs,index=T,decreasing=T)$ix[1]
 d2 = sort(rsqs,index=T,decreasing=T)$ix[2]
 
 # show some example trajectories in PC space that found best solution
-pdf(file='figures/xor_transitions.pdf',height=6,width=5)
+#pdf(file='figures/xor_transitions.pdf',height=6,width=5)
 cShown = 20
 plotDat = xsp$scores[1:(cycleTime*cShown),]
 plot(plotDat[,d1],plotDat[,d2],type='b',pch=13,cex=.5,col='gray',main='XOR Operator Components',
@@ -83,7 +83,7 @@ plot(plotDat[,d1],plotDat[,d2],type='b',pch=13,cex=.5,col='gray',main='XOR Opera
 #points(plotDat[1,d1],plotDat[1,d2],type='p',cex=1.5,pch=15,col='green')
 choiceIxes = seq(from=cycleTime,to=nrow(plotDat),by=cycleTime)
 text(plotDat[choiceIxes,d1],plotDat[choiceIxes,d2],lab=dataOut[1:cShown],cex=2)
-dev.off()
+#dev.off()
 #########
 
 

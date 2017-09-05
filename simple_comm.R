@@ -4,17 +4,18 @@
 
 setwd('~/Dropbox/new.projects/multiModal')
 
-# seedRand = 100 # one shown in the paper
+seedRand = 100 # one shown in the paper
 coefsTAll = c() # coefficients for topic, word, and sound across first 20 PCA components
 coefsWAll = c()
 coefsSAll = c()
-# 
-for (seedRand in c(round(runif(100)*1000),100)) { # so that figures reflect seed 100 (in paper)
+
+# FOR LOOP FOR 100 SIMULATIONS
+#for (seedRand in c(round(runif(100)*1000),100)) { # so that figures reflect seed 100 (in paper)
 # 
 print(seedRand)
 set.seed(seedRand)
 
-data = read.table('data/node_activations_13overlap.data',sep=',',skip=2)$V1 # uses sentgen output based on logic of convo (topics, words, phonemes)
+data = read.table('data/node_activations.data',sep=',',skip=2)$V1 # uses sentgen output based on logic of convo (topics, words, phonemes)
 
 dataIn = matrix(0,length(data),6)
 dataIn[1:length(data)+(data[1:length(data)]-1)*length(data)] = 1
@@ -66,7 +67,7 @@ plot(Y[6,],dataOut[,6]) # predicting final word; should be hardest
 
 ###
 ### let's get the well-known test set, going from t1 to t2
-data = read.table('data/node_activations_13overlap_test.data',sep=',',skip=2) # uses sentgen output based on logic of convo (topics, words, phonemes)
+data = read.table('data/node_activations_test.data',sep=',',skip=2) # uses sentgen output based on logic of convo (topics, words, phonemes)
 words = data$V3 # see data file
 topics = data$V2
 
@@ -102,7 +103,7 @@ d2 = sort(rsqs,index=T,decreasing=T)$ix[2]
 convLabels = c("a","b")
 labSeq = convLabels[topics]
 
-pdf(file="figures/convo_topic_transitions.pdf",height=6,width=5)
+#pdf(file="figures/convo_topic_transitions.pdf",height=6,width=5)
 plotDat = xsp$x
 plot(plotDat[,d1],plotDat[,d2],type='b',pch=dataOut+1,col='gray',main='Topic-Predictive Components',
      xlab=paste('Principal Component',d1),ylab=paste('Principal Component',d2))
@@ -110,7 +111,7 @@ points(plotDat[1,d1],plotDat[1,d2],type='p',cex=1.5,pch=15,col='green')
 points(plotDat[l,d1],plotDat[l,d2],type='p',cex=1.5,pch=15,col='red')
 choiceIxes = seq(from=cycleTime,to=nrow(plotDat),by=cycleTime)
 text(plotDat[,d1],plotDat[,d2],lab=labSeq[2:(l+1)],cex=1)
-dev.off()
+#dev.off()
 td1 = d1 # save for later
 
 # find the best components for WORD 1 vs. 2&3
@@ -136,7 +137,7 @@ if (d1==td1) {
 convLabels = c("i","ii","iii")
 labSeq = convLabels[words]
 
-pdf(file="figures/convo_word_and_topic_transitions.pdf",height=6,width=5)
+#pdf(file="figures/convo_word_and_topic_transitions.pdf",height=6,width=5)
 plotDat = xsp$x
 plot(plotDat[,td1],plotDat[,wd1],type='b',pch=13,cex=.5,col='gray',main='Topic x Word Component',
      xlab=paste('Topic Principal Component',td1),ylab=paste('Word Principal Component',wd1))
@@ -144,7 +145,7 @@ points(plotDat[1,td1],plotDat[1,wd1],type='p',cex=1.5,pch=15,col='green')
 points(plotDat[l,td1],plotDat[l,wd1],type='p',cex=1.5,pch=15,col='red')
 choiceIxes = seq(from=cycleTime,to=nrow(plotDat),by=cycleTime)
 text(plotDat[,td1],plotDat[,wd1],lab=labSeq[2:(l+1)],cex=1)
-dev.off()
+#dev.off()
 
 coefsT = c() # coefficients for topic, word, and sound across first 20 PCA components
 coefsW = c()
@@ -156,23 +157,24 @@ for (i in 1:20) {
   coefsS = c(coefsS,summary(lm(plotDat[,i]~as.factor(data[2:(l+1)])))$r.sq)
 }
 # plot 'em together
-pdf(file="figures/pcs_by_predictors.pdf",height=6,width=5)
+#pdf(file="figures/pcs_by_predictors.pdf",height=6,width=5)
 plot(abs(coefsT),lwd=3,col='gray',type='o',xlab='Principal Component',ylab='R-Squared')
 #text(4,2,'topics',col='gray',cex=1.5)
 points(abs(coefsW),lwd=3,col=rgb(.5,.5,.5),type='o')
 #text(5.2,1.2,'words',col=rgb(.5,.5,.5),cex=1.5)
 points(abs(coefsS),lwd=3,col='black',type='o')
 #text(10,.4,'sounds',col='black',cex=1.5)
-dev.off()
+#dev.off()
 
 coefsTAll = rbind(coefsTAll,coefsT)
 coefsWAll = rbind(coefsWAll,coefsW)
 coefsSAll = rbind(coefsSAll,coefsS)
 
-} # for the seed for loop; comment if doing one seed
+# FOR LOOP FOR 100 SIMULATIONS
+#} # for the seed for loop; comment if doing one seed
 
+# FOR LOOP FOR 100 SIMULATIONS
 # if running seed loop, let's do all
-
 #pdf(file="figures/pcs_by_predictors_ALL.pdf",height=6,width=5)
 #plot(colMeans(coefsTAll),lwd=3,col='gray',type='o',xlab='Principal Component',ylab='R-Squared')
 #text(4,2,'topics',col='gray',cex=1.5)
@@ -182,32 +184,31 @@ coefsSAll = rbind(coefsSAll,coefsS)
 #text(10,.4,'sounds',col='black',cex=1.5)
 #dev.off()
 
-
-
-pdf(file="figures/pcs_by_predictors_ALL.pdf",height=4,width=8)
-par(mfrow=c(1,3))
-for (i in 1:100) {
-  if (i==1) {
-    plot(coefsTAll[i,],col='gray',xlab='Principal Component',ylab='R-Squared',main='Topics',ylim=c(0,.8))
-  } else {
-    points(coefsTAll[i,],col='gray')
-  }  
-}
-for (i in 1:100) {
-  if (i==1) {
-    plot(coefsWAll[i,],col=rgb(.5,.5,.5),xlab='Principal Component',ylab='R-Squared',main='Words',ylim=c(0,.8))
-  } else {
-    points(coefsWAll[i,],col=rgb(.5,.5,.5))
-  }  
-}
-for (i in 1:100) {
-  if (i==1) {
-    plot(coefsSAll[i,],col='black',xlab='Principal Component',ylab='R-Squared',main='Sounds',ylim=c(0,.8))
-  } else {
-    points(coefsSAll[i,],col='black')
-  }  
-}
-dev.off()
+# FOR LOOP FOR 100 SIMULATIONS
+#pdf(file="figures/pcs_by_predictors_ALL.pdf",height=4,width=8)
+# par(mfrow=c(1,3))
+# for (i in 1:100) {
+#   if (i==1) {
+#     plot(coefsTAll[i,],col='gray',xlab='Principal Component',ylab='R-Squared',main='Topics',ylim=c(0,.8))
+#   } else {
+#     points(coefsTAll[i,],col='gray')
+#   }  
+# }
+# for (i in 1:100) {
+#   if (i==1) {
+#     plot(coefsWAll[i,],col=rgb(.5,.5,.5),xlab='Principal Component',ylab='R-Squared',main='Words',ylim=c(0,.8))
+#   } else {
+#     points(coefsWAll[i,],col=rgb(.5,.5,.5))
+#   }  
+# }
+# for (i in 1:100) {
+#   if (i==1) {
+#     plot(coefsSAll[i,],col='black',xlab='Principal Component',ylab='R-Squared',main='Sounds',ylim=c(0,.8))
+#   } else {
+#     points(coefsSAll[i,],col='black')
+#   }  
+# }
+#dev.off()
 
 
 

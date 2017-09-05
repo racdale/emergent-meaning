@@ -1,4 +1,6 @@
 ! first terminal element always reflects topic of convo
+! see Dale, 2007 for details on using Sentgen:
+! https://arxiv.org/pdf/cs/0702081.pdf
 S>T1.5|T2.5
 T1>w1.5|w2_t1.5,T1.9|T2.08|tend1.02
 T2>w2_t2.5|w3.5,T2.9|T1.08|tend2.02
