@@ -2,7 +2,7 @@
 
 Code and data for the paper:
 
-   Dale, R. and Kello, C. K. *“How do humans make sense?” Multiscale dynamics and emergent meaning*. Under consideration at New Ideas in Psychology for the special issue on Emergent Meaning (editor: Prof. Barbara Malt).
+   Dale, R. and Kello, C. T. *“How do humans make sense?” Multiscale dynamics and emergent meaning*. Under consideration at New Ideas in Psychology for the special issue on Emergent Meaning (editor: Prof. Barbara Malt).
 
 * `xor_example.R`: relevant to primer section on reservoir computing.
 
