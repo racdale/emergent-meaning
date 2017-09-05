@@ -2,7 +2,7 @@
 ### built from the ESN demonstration code of
 # Mantas Lukosevicius 2012, http://minds.jacobs-university.de/mantas
 
-setwd('~/Dropbox/new.projects/multiModal')
+setwd('~/Dropbox/new.projects/multiModal/final-github/emergent-meaning')
 
 seedRand = 100 # one shown in the paper
 coefsTAll = c() # coefficients for topic, word, and sound across first 20 PCA components
