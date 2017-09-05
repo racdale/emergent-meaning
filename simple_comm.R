@@ -79,7 +79,7 @@ dataOut = dataIn[2:nrow(dataIn),] # it's prediction (then generation), so take o
 dataIn = dataIn[1:(nrow(dataIn)-1),] 
 l = dim(dataIn)[1]
 
-# let's see how it moves between "topic spaces"
+# let's see how it moves between "topic spaces" in test set
 Y = matrix(0,outSize,l)
 xs = c()
 for (t in 1:l){
