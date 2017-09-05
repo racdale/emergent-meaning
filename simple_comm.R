@@ -158,7 +158,7 @@ for (i in 1:20) {
 }
 # plot 'em together
 #pdf(file="figures/pcs_by_predictors.pdf",height=6,width=5)
-plot(abs(coefsT),lwd=3,col='gray',type='o',xlab='Principal Component',ylab='R-Squared')
+plot(abs(coefsT),lwd=3,col='gray',type='o',xlab='Principal Component',ylab='R-Squared',ylim=c(0,1))
 #text(4,2,'topics',col='gray',cex=1.5)
 points(abs(coefsW),lwd=3,col=rgb(.5,.5,.5),type='o')
 #text(5.2,1.2,'words',col=rgb(.5,.5,.5),cex=1.5)
