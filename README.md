@@ -6,6 +6,6 @@ Code and data for the paper:
 
 * `xor_example.R`: relevant to primer section on reservoir computing.
 
-* `simple_comm.R`: simplified communication model.
+* `simple_comm...R`: simplified communication model.
 
 * Folder `data`: contains source files used by simulations, including phrase-structure grammar interpreter for the simplified communication system
