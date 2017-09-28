@@ -6,6 +6,9 @@
 # train on large input data based on grammar (see sentgen grammar)
 ####################################
 
+# note: make sure to set.seed with single simulation used in paper (=62), if reproducing model/results exactly
+# set.seed(seedRand)
+
 data = read.table('data/training.data',sep=',',skip=2)$V1 # uses sentgen output based on logic of convo (topics, words, phonemes)
 dataIn = matrix(0,length(data),6)
 dataIn[1:length(data)+(data[1:length(data)]-1)*length(data)] = 1
@@ -112,8 +115,8 @@ pdf(file="figures/convo_topic_transitions.pdf",height=6,width=5)
 plotDat = xsp$x
 plot(plotDat[,d1],plotDat[,d2],type='b',pch=dataOut+1,col='gray',main='Topic-Predictive Components',
      xlab=paste('Principal Component',d1),ylab=paste('Principal Component',d2))
-points(plotDat[1,d1],plotDat[1,d2],type='p',cex=1.5,pch=15,col='green')
-points(plotDat[l,d1],plotDat[l,d2],type='p',cex=1.5,pch=15,col='red')
+points(plotDat[1,d1],plotDat[1,d2],type='p',cex=3,pch=0,col='black')
+points(plotDat[l,d1],plotDat[l,d2],type='p',cex=3,pch=1,col='black')
 text(plotDat[,d1],plotDat[,d2],lab=labSeq[2:(l+1)],cex=1)
 dev.off()
 td1 = d1 # save for later
@@ -148,8 +151,8 @@ pdf(file="figures/convo_word_and_topic_transitions.pdf",height=6,width=5)
 plotDat = xsp$x
 plot(plotDat[,td1],plotDat[,wd1],type='b',pch=13,cex=.5,col='gray',main='Topic x Word Component',
      xlab=paste('Topic Principal Component',td1),ylab=paste('Word Principal Component',wd1))
-points(plotDat[1,td1],plotDat[1,wd1],type='p',cex=1.5,pch=15,col='green')
-points(plotDat[l,td1],plotDat[l,wd1],type='p',cex=1.5,pch=15,col='red')
+points(plotDat[1,td1],plotDat[1,wd1],type='p',cex=3,pch=0,col='black')
+points(plotDat[l,td1],plotDat[l,wd1],type='p',cex=3,pch=1,col='black')
 text(plotDat[,td1],plotDat[,wd1],lab=labSeq[2:(l+1)],cex=1)
 dev.off()
 
